@@ -36,11 +36,5 @@ public class Machine3x2 extends AbstractEntity {
     @NotNull
     private Double coreTemperature;
 
-    private Double totalNetProduction;
-
-    private Double scrapPercentage;
-
-    private Double downtimePercentage;
-
 
 }

@@ -1,10 +1,9 @@
 package marviq.ogel.controller;
 
 import marviq.ogel.dto.Machine2x2Dto;
-import marviq.ogel.entity.Machine2x2;
+
 import marviq.ogel.exception.ErrorResponse;
 import marviq.ogel.service.Machine2x2Service;
-import marviq.ogel.util.MachineUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +19,18 @@ import java.util.Optional;
 @RequestMapping("/api/machine2x2")
 public class Machine2x2Controller {
 
-    private final  Machine2x2Service machine2x2Service;
-    private final MachineUtil machineUtil;
+    private final Machine2x2Service machine2x2Service;
+
 
     @Autowired
-    public Machine2x2Controller(Machine2x2Service machine2x2Service, MachineUtil machineUtil) {
+    public Machine2x2Controller(Machine2x2Service machine2x2Service) {
         this.machine2x2Service = machine2x2Service;
-        this.machineUtil = machineUtil;
     }
 
+
     @GetMapping
-    public ResponseEntity <List<Machine2x2>> getAll() {
-        return new ResponseEntity<>(machine2x2Service.findAll(), HttpStatus.OK);
+    public List<Machine2x2Dto> getAll() {
+        return machine2x2Service.findAll();
     }
 
     @GetMapping("/{id}")
@@ -42,4 +41,18 @@ public class Machine2x2Controller {
         }
         return new ResponseEntity<>(new ErrorResponse("The machine was not found", 404), HttpStatus.NOT_FOUND);
     }
+
+
+    @GetMapping("/netProduction")
+    public List<Double> getReport() {
+
+        List<Machine2x2Dto> machineList = machine2x2Service.findAll();
+        List<Double> netProductionList = null;
+        for (Machine2x2Dto machine : machineList) {
+            double totalNetProduction = machine.getGrossProduction() - machine.getScrap();
+            netProductionList.add(totalNetProduction);
+        }
+        return netProductionList;
+    }
+
 }

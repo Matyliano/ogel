@@ -1,12 +1,9 @@
 package marviq.ogel.entity;
 
-
 import org.junit.platform.commons.util.ToStringBuilder;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+
 
 @MappedSuperclass
 public abstract class AbstractEntity implements BaseEntity {
