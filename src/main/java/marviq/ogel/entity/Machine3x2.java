@@ -36,5 +36,4 @@ public class Machine3x2 extends AbstractEntity {
     @NotNull
     private Double coreTemperature;
 
-
 }

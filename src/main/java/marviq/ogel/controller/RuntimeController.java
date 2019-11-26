@@ -1,7 +1,6 @@
 package marviq.ogel.controller;
 
 import marviq.ogel.dto.RuntimeDto;
-import marviq.ogel.entity.Machine2x2;
 import marviq.ogel.exception.ErrorResponse;
 import marviq.ogel.service.RuntimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -51,18 +49,17 @@ public class RuntimeController {
 
     @GetMapping("/isRunning")
     public Page<RuntimeDto> getByIsRunning(@PageableDefault(size = 15) Pageable pageable, @RequestParam("isRunning") Integer isRunning) {
-       try{
-        return runtimeService.findByIsRunning(isRunning, pageable);
-    } catch (NoSuchElementException ex){
-           throw new NoSuchElementException("Value of isRunning was not found");
-       }
+        try {
+            return runtimeService.findByIsRunning(isRunning, pageable);
+        } catch (NoSuchElementException ex) {
+            throw new NoSuchElementException("Value of isRunning was not found");
+        }
     }
 
     @GetMapping("/isRunningAndMachine")
     public Page<RuntimeDto> getByIsRunningAndMachineName(@PageableDefault(size = 15) Pageable pageable, @RequestParam("isRunning") Integer isRunning, @RequestParam("machineName") String machineName) {
         return runtimeService.findByIsRunningAndAndMachineName(isRunning, machineName, pageable);
     }
-
 
 
 }

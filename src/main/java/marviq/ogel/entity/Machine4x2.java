@@ -24,7 +24,7 @@ public class Machine4x2 extends AbstractEntity {
     @NotNull
     private LocalDateTime endDate;
 
-    @Column(name = "gross_production")
+    @Column(name = "production")
     @NotNull
     private Double grossProduction;
 

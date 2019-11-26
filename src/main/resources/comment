@@ -2,5 +2,6 @@ I noticed that the downtime is not checked every 5 minutes like all of the other
 It may happen that a breakdown will occur during this 20 minutes and the DB application knows nothing about the breakdown for 15 minutes.
 I think, that for user purposes it would be convenient to check the correlation between for example core temperature, and production value, even when the previous status of machine is "isrunning".
 That way the operator would know faster about possible breakdown, before the status "is running" is checked.
+
 Also I would add some additional functionality like "predictive maintenance" - for example if the production is decreasing,
 and temperature of machine is going up - then it is possible that there is a breakdown coming - the operator may then react faster, and prevent the breakdown and increase overall productivity.

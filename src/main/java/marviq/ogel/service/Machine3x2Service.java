@@ -5,11 +5,11 @@ import marviq.ogel.dto.Machine3x2Dto;
 import marviq.ogel.entity.Machine3x2;
 import marviq.ogel.repository.Machine3x2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class Machine3x2Service {
@@ -23,9 +23,10 @@ public class Machine3x2Service {
         this.converter = converter;
     }
 
-    public Page<Machine3x2Dto> findAll(Pageable pageable) {
-        return machine3x2Repository.findAll(pageable).map(converter::convert);
+    public List<Machine3x2Dto> findAll() {
+        return machine3x2Repository.findAll().stream().map(converter::convert).collect(Collectors.toList());
     }
+
 
     public Optional<Machine3x2Dto> getMachine(Long id) {
         Optional<Machine3x2> machineById = machine3x2Repository.findById(id);
