@@ -43,16 +43,4 @@ public class Machine2x2Controller {
     }
 
 
-    @GetMapping("/netProduction")
-    public List<Double> getReport() {
-
-        List<Machine2x2Dto> machineList = machine2x2Service.findAll();
-        List<Double> netProductionList = null;
-        for (Machine2x2Dto machine : machineList) {
-            double totalNetProduction = machine.getGrossProduction() - machine.getScrap();
-            netProductionList.add(totalNetProduction);
-        }
-        return netProductionList;
-    }
-
 }
